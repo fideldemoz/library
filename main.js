@@ -58,7 +58,7 @@ function renderBookstoHtml(obj) {
 	const title = obj.title;
 	dNode.textContent = "Delete";
 	uNode.textContent = "Change read status";
-
+	dNode.classList.add("delete");
 	uNode.addEventListener("click", () => {
 		if (obj.read === "Read") {
 			obj.read = "Not read yet";
