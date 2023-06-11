@@ -1,75 +1,92 @@
+"use strict"
+
+let myLibrary = [];
+const form = document.querySelector("form");
+const modal = document.querySelector(".modal");
 const showForm = document.querySelector("#show-form");
-const form = document.querySelector("#form")
-const body = document.querySelector("body")
-const table = document.querySelector(".books-table")
 
-showForm.addEventListener("click", function() {
-	if (form.style.display === "block") {
-		hideFormfn()
+function Book (title,author,pages,read) {
+	this.title = title
+	this.author = author
+	this.pages = pages
+	if (read === true) {
+		this.read = 'Read'
 	} else {
-		showFormFn()
+		this.read = 'Not read yet'
 	}
+
+}
+
+function addBookToLibrary (book) {
+	myLibrary.push(book)
+}
+
+function newBook () {
+	const title = document.querySelector("#title").value;
+	const author = document.querySelector("#author").value;
+	const pages = document.querySelector("#pages").value;
+	const read = document.querySelector("#read").checked;
+	const book = new Book(title,author,pages,read);
+	addBookToLibrary(book);
+	renderBookstoHtml(book);
+}
+
+function renderBookstoHtml(obj) {
+	const bookTable = document.querySelector(".books-table");
+	const wrapper = document.createElement("div");
+	const tNode = document.createElement("h2");
+	const aNode = document.createElement("h3");
+	const pNode = document.createElement("p");
+	const rNode = document.createElement("p");
+	const dNode = document.createElement("button");
+	const uNode = document.createElement("button");
+	const title = obj.title;
+	dNode.textContent = "Delete";
+	uNode.textContent = "Change read status";
+
+	uNode.addEventListener("click", () => {
+		if (obj.read === "Read") {
+			obj.read = "Not read yet";
+			uNode.textContent = "Mark as read";
+		} else {
+			obj.read = "Read";
+			uNode.textContent = "Mark as not read";
+		}
+	rNode.textContent = obj.read;
+	})
+	tNode.textContent = obj.title;
+	aNode.textContent = obj.author;
+	pNode.textContent = obj.pages;
+	rNode.textContent = obj.read;
+	wrapper.appendChild(tNode);
+	wrapper.appendChild(aNode);
+	wrapper.appendChild(pNode);
+	wrapper.appendChild(rNode);
+	wrapper.appendChild(dNode);
+	wrapper.appendChild(uNode);
+	bookTable.appendChild(wrapper);
+
+	dNode.addEventListener("click", () => {
+		bookTable.removeChild(wrapper);
+		myLibrary = myLibrary.filter((obj) => obj.title !== title);
+	})
+}
+
+function formToggle() {
+	if (modal.style.display === 'block') {
+		modal.style.display = 'none'
+		showForm.textContent = 'Show Form';
+	} else {
+		modal.style.display = 'block';
+		showForm.textContent = 'Hide Form';
+	}
+}
+
+showForm.addEventListener("click", formToggle)
+
+form.addEventListener("submit", (e) => {
+	e.preventDefault();
+	newBook();
+	form.reset();
+	formToggle();
 })
-const hideFormfn = function () {
-	form.style.display = "none";
-	showForm.textContent = "Add a new book"
-}
-const showFormFn = function () {
-	form.style.display = "block";
-	showForm.textContent = "Close form"
-}
-const books = [];
-const inputTitle = form.querySelector("input[name='book-title']");
-const inputAuthor = form.querySelector("input[name='book-author']");
-const inputPages = form.querySelector("input[name='book-pages']");
-const inputRead = form.querySelector("input[name='book-read']");
-const submit = form.querySelector("input[type='submit']");
-
-
-const addBook = function (title, author, pages, read) {
-	this.title =  title,
-	this.author = author,
-	this.pages = pages,
-	this.isRead = read
-}
-
-form.onsubmit = function () {
-	const title = inputTitle.value;
-	const author = inputAuthor.value;
-	const pages = inputPages.value;
-	const isRead = inputRead.checked;
-	isRead == true ? read = 'Read' : read = 'Not read yet';
-	const newBook = new addBook(title, author, pages, read);
-	books.push(newBook)
-    displayBooks(title, author, pages, read)
-    form.reset()
-    hideFormfn()
-    return false;
-};
-
-
-function displayBooks(title, author, pages, read) {
-	const container = document.createElement("div")
-	const htitle = document.createElement("h1")
-	const hauthor = document.createElement("p")
-	const hpages = document.createElement("p")
-	const hread = document.createElement("p")
-	const clear = document.createElement("button")
-	clear.classList.add('delete') 
-
-	htitle.textContent = title;
-	hauthor.textContent = 'by ' + author;
-	hpages.textContent = `${pages} pages`;
-	hread.textContent = read;
-	clear.textContent = 'Delete';
-	(hread.textContent === 'Read') ? hread.style.color = 'green': hread.style.color = 'gray';
-	table.appendChild(container)
-	const elements = [htitle, hauthor, hpages, hread, clear]
-	elements.forEach((item) => {
-		container.appendChild(item);
-	})
-	clear.addEventListener("click", function () {
-		table.removeChild(clear.parentNode)
-	})
-
-}

@@ -16,20 +16,22 @@
 	</header>
 	<main>
 		<button id="show-form">Add a new book</button>
-		<form id="form" action="./" method="GET">
-			<fieldset>
-				<legend>Add a New Book Record</legend>
-				<label for="title">Title</label>
-				<input type="text" name="book-title" id="title" required="">
-				<label for="author">Author</label>
-				<input type="text" name="book-author" id="author" required="">
-				<label for="pages">Pages</label>
-				<input type="number" name="book-pages" id="pages" required="">
-				<label for="read">Have you read?</label>
-				<input type="checkbox" name="book-read" value="yes" id="read">
-				<input type="submit" name="submit" id="submit">
-			</fieldset>
-		</form>
+		<div class="modal">
+			<form id="form" action="./" method="GET">
+				<fieldset>
+					<legend>Add a New Book Record</legend>
+					<label for="title">Title</label>
+					<input type="text" name="book-title" id="title" required="">
+					<label for="author">Author</label>
+					<input type="text" name="book-author" id="author" required="">
+					<label for="pages">Pages</label>
+					<input type="number" name="book-pages" id="pages" required="">
+					<label for="read">Have you read?</label>
+					<input type="checkbox" name="book-read" value="yes" id="read">
+					<input type="submit" name="submit" id="submit">
+				</fieldset>
+			</form>			
+		</div>
 		<div class="books-table">
 
 		</div>
