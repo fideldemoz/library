@@ -4,6 +4,7 @@ let myLibrary = [];
 const form = document.querySelector("form");
 const modal = document.querySelector(".modal");
 const showForm = document.querySelector("#show-form");
+const alert = document.querySelector(".alert")
 
 function Book (title,author,pages,read) {
 	this.title = title
@@ -18,7 +19,22 @@ function Book (title,author,pages,read) {
 }
 
 function addBookToLibrary (book) {
-	myLibrary.push(book)
+
+	function bookExists (obj){
+		return obj.title === book.title;
+	}
+
+	function alertBookExists () {
+		alert.textContent = ''
+	}
+
+	if (!myLibrary.some(bookExists)) {
+		myLibrary.push(book);
+		renderBookstoHtml(book);
+	} else {
+		alert.textContent = 'Error: book title exists in the Library'
+		window.setInterval( alertBookExists, 3000)
+	}
 }
 
 function newBook () {
@@ -28,7 +44,6 @@ function newBook () {
 	const read = document.querySelector("#read").checked;
 	const book = new Book(title,author,pages,read);
 	addBookToLibrary(book);
-	renderBookstoHtml(book);
 }
 
 function renderBookstoHtml(obj) {
@@ -54,9 +69,10 @@ function renderBookstoHtml(obj) {
 		}
 	rNode.textContent = obj.read;
 	})
-	tNode.textContent = obj.title;
-	aNode.textContent = obj.author;
-	pNode.textContent = obj.pages;
+	rNode.style.color = 'gray';
+	tNode.textContent = `Title: ${obj.title}`;
+	aNode.textContent = `By ${obj.author}`;
+	pNode.textContent = `No. of pages: ${obj.pages}`;
 	rNode.textContent = obj.read;
 	wrapper.appendChild(tNode);
 	wrapper.appendChild(aNode);

@@ -137,3 +137,9 @@ footer {
 	font-size: 12px;
 	margin: 4px 0;
 }
+
+.alert {
+	text-align: center;
+	color: red;
+	font-weight: 700;
+}
