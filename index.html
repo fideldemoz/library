@@ -15,7 +15,6 @@
 		</div>
 	</header>
 	<main>
-		<button id="show-form">Add a new book</button>
 		<div class="modal">
 			<form id="form" action="./" method="GET">
 				<fieldset>
@@ -32,10 +31,23 @@
 				</fieldset>
 			</form>			
 		</div>
-		<div class="books-table">
-
-		</div>
-		<p class="alert"></p>
+		<button id="show-form">Add a new book</button>
+		<table class="books-table">
+			<thead>
+				<tr>
+					<th>Index</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Pages</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+			</head>
+		</table>
+		<p class="alert">Click the row to delete entry</p>
+		<p class="alert green">Click the read cell to change read status</p>
 	</main>
 	<footer>&copy; Fidel</footer>
 </body>

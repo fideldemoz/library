@@ -50,8 +50,6 @@ header {
 }
 
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
   top: 20%;
@@ -110,20 +108,15 @@ footer {
 }
 
 .books-table {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, 200px);
-	justify-content: center;
-	grid-gap: 1rem;
+	border: 1px solid gray;
+	width: 80%;
+	margin: 1rem auto;
 }
-
-.books-table div {
-	background-color: hsla(80,100%,90%,1);
-	padding: 8px 12px;
-	margin: 10px;
-	color: hsla(0,0%,10%,1);
-	inline-size: 200px;
-	overflow-wrap: break-word;
-	font-weight: 600;
+table, tr, td, th {
+	border: 1px solid gray;
+	border-collapse: collapse;
+	min-height: 60px;
+	padding: 4px 8px;
 }
 
 .books-table div h1{
@@ -141,5 +134,50 @@ footer {
 .alert {
 	text-align: center;
 	color: red;
-	font-weight: 700;
+	font-weight: 300;
+	font-size: 12px;
+}
+.alert.green {
+	color: green;
+}
+tr:hover {
+	background-color: red;
+}
+thead tr:hover {
+	background-color: gray;
+}
+.read:hover {
+	background-color: green;
+}
+@media screen and (max-width: 550px) {
+	table, thead, tbody, th, td, tr {
+		display: block;
+	}
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	tr {
+		border: 1px solid #ccc;
+	}
+	td {
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+	}
+	td:before {
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+	td:nth-of-type(1):before { content: "Index"; }
+	td:nth-of-type(2):before { content: "Title"; }
+	td:nth-of-type(3):before { content: "Author"; }
+	td:nth-of-type(4):before { content: "Pages"; }
+	td:nth-of-type(5):before { content: "Read"; }
 }
