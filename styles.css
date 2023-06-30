@@ -25,16 +25,6 @@ header {
 	z-index: 1;
 }
 
-#show-form {
-	padding: 8px 12px;
-	border: .2px solid gray;
-	background-color: hsla(120,50%,50%,1);
-	font-weight: 700;
-	color: white;
-	display: block;
-	margin: 0 auto;
-}
-
 .delete {
 	padding: 8px 12px;
 	border: 2px solid red;
@@ -43,10 +33,6 @@ header {
 	color: hsla(0,0%,20%,1);
 	display: block;
 	margin: 0 auto;
-}
-
-#show-form:hover {
-	background-color: gray;
 }
 
 .modal {

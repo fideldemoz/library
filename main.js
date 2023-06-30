@@ -5,7 +5,7 @@
 			this.title = title;
 			this.author = author;
 			this.pages = `${pages} pages`;
-			this.read = (() => {return read === true ? "read" : "not read"})();
+			this.read = (() => {return read === true ? "Read" : "Not read"})();
 		}
 		addToShelf (newBook) {
 			if (!bookExists()) {
@@ -79,6 +79,7 @@
 		pages = document.querySelector("#pages").value,
 		read = document.querySelector("#read").checked;
 		event.preventDefault();
+		form.reset();
 		let newBook = new Library (title, author, pages, read);
 		newBook.addToShelf(newBook);
 })})()
